@@ -12,7 +12,15 @@ in
         type = types.bool;
         default = false;
         description = ''
-          Enable periodic tarsnap backups.
+          Enable periodic duplicity backups.
+        '';
+      };
+
+      user = mkOption {
+        type = types.string;
+        default = "";
+        description = ''
+          User to run the script as. Useful to make sure the GPG key id is accessible.
         '';
       };
 
@@ -99,7 +107,7 @@ in
         IOSchedulingClass = "idle";
         NoNewPrivileges = "true";
         CapabilityBoundingSet = "CAP_DAC_READ_SEARCH";
-        User="dtulig";
+        User=cfg.user;
       };
     };
 

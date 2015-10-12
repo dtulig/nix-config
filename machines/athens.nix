@@ -51,6 +51,7 @@
 
   services.duplicity = {
     enable = true;
+    user = "dtulig";
     archives = {
       home = {
         sourceDirectory = "/home/dtulig";
