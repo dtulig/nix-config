@@ -9,8 +9,6 @@
     emacs
     git
 
-    fail2ban
-
     tmux
     unzip
     wget
@@ -27,4 +25,7 @@
   ];
 
   programs.zsh.enable = true;
+
+  services.fail2ban.enable = true;
+  services.fail2ban.jails.ssh-iptables = "enabled = true";
 }
