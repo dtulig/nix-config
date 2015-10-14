@@ -25,6 +25,8 @@ rec {
   nix.useChroot = true;
 
   boot.kernelModules = [ "ecryptfs" ];
+  boot.cleanTmpDir = true;
+  boot.tmpOnTmpfs = true;
 
   time.timeZone = "America/Chicago";
 
