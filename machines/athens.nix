@@ -8,6 +8,10 @@
     ../profiles/gaming.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    gcal2org
+  ];
+
   services.xserver.xrandrHeads = [ "DVI-0" "DVI-1" ];
 
   # Use the GRUB 2 boot loader.

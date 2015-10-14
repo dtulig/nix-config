@@ -17,8 +17,6 @@
 
     dropbox
     irssi
-
-    gcal2org
   ];
 
   # Enable the X11 windowing system.
