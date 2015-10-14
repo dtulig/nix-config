@@ -22,4 +22,4 @@ else
 fi
 cd $wd
 
-sudo -i nixos-rebuild --keep-failed --show-trace -I nixos=/home/dtulig/nixpkgs-channels/nixos -I nixpkgs=/home/dtulig/nixpkgs-channels $operation
+sudo -i nixos-rebuild --keep-failed --show-trace -I nixos=$HOME/workspace/nix/nixpkgs/nixos -I nixpkgs=$HOME/workspace/nix/nixpkgs $operation
