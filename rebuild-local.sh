@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SRC=$HOME/dtulig-nixpkgs
+SRC=$HOME/nix-config
 
 sudo rsync --filter="protect /hardware-configuration.nix" \
            --filter="protect /hostname" \
