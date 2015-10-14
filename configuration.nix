@@ -24,6 +24,8 @@ rec {
 
   nix.useChroot = true;
 
+  boot.kernelModules = [ "ecryptfs" ];
+
   time.timeZone = "America/Chicago";
 
   networking.hostName = "${hostName}";
