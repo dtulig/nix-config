@@ -40,8 +40,6 @@ rec {
 
   security.pam.enableEcryptfs = true;
 
-  hardware.pulseaudio.enable = true;
-
   users.extraUsers.dtulig = {
     isNormalUser = true;
     home = "/home/dtulig";
