@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    headless.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     dmenu
     chromium
@@ -14,9 +18,6 @@
     feh
     xcompmgr
     glxinfo
-
-    dropbox
-    irssi
   ];
 
   # Enable the X11 windowing system.
