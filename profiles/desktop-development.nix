@@ -2,12 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    cabal2nix
-    nix-prefetch-scripts
-
-    gdb
-    binutils
-
-    nix-repl
+    idea.android-studio
+    idea.idea-ultimate
   ];
 }
