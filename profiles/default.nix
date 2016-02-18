@@ -22,7 +22,7 @@
     lshw
     pciutils
 
-    gnupg1
+    gnupg1orig
 
     duplicity
   ];
