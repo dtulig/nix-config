@@ -19,7 +19,7 @@ rec {
 
   nix.extraOptions = ''
     auto-optimise-store = true
-    build-use-substitutes = false
+    build-fallback = true
   '';
 
   nix.useChroot = true;
