@@ -17,5 +17,10 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
-  networking.firewall.allowedTCPPorts = [ 8080 8081 3000 ];
+  networking.firewall.allowedTCPPorts = [ 8080 8081 3000 80 443 ];
+
+  services.nginx = {
+    enable = true;
+    config = pkgs.lib.readFile /var/lib/nginx/nginx.conf;
+  };
 }
