@@ -8,6 +8,8 @@
     ../profiles/email.nix
   ];
 
+  security.pam.enableEcryptfs = true;
+
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.kernelParams = [ "console=ttyS0" ];
