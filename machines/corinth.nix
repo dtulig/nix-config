@@ -6,6 +6,7 @@
     ../profiles/headless.nix
     ../profiles/development.nix
     ../profiles/email.nix
+    <nixos/modules/services/misc/gitit.nix>
   ];
 
   security.pam.enableEcryptfs = true;
@@ -22,6 +23,14 @@
   services.nginx = {
     enable = true;
     config = pkgs.lib.readFile /var/lib/nginx/nginx.conf;
+  };
+
+  services.gitit = {
+    enable = true;
+    address = "127.0.0.1";
+    requireAuthentication = "read";
+    authenticationMethod = "http";
+    plugins = [];
   };
 
   security.acme.certs."davidtulig.com" = {
