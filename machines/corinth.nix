@@ -23,4 +23,15 @@
     enable = true;
     config = pkgs.lib.readFile /var/lib/nginx/nginx.conf;
   };
+
+  security.acme.certs."davidtulig.com" = {
+    webroot = "/var/lib/http";
+    extraDomains = {
+      "wiki.davidtulig.com" = null;
+    };
+    email = "david.tulig@gmail.com";
+    user = "nginx";
+    group = "nginx";
+    postRun = "systemctl reload nginx.service";
+  };
 }
