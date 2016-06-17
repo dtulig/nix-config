@@ -32,4 +32,9 @@
 
   services.fail2ban.enable = true;
   services.fail2ban.jails.ssh-iptables = "enabled = true";
+
+  services.syncthing = {
+    enable = true;
+    systemService = false;
+  };
 }
