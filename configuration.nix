@@ -38,6 +38,10 @@ rec {
 
   services.dbus.enable = true;
 
+  services.logind.extraConfig = ''
+    KillUserProcesses=yes
+  '';
+
   security.pam.enableEcryptfs = true;
 
   users.extraUsers.dtulig = {
