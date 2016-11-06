@@ -72,9 +72,9 @@ rec {
       idea-ultimate = self.idea.idea-ultimate.override {
         jdk = pkgs.oraclejdk8;
       };
-      android-studio = self.idea.android-studio.override {
-        jdk = pkgs.oraclejdk8;
-      };
+      # android-studio = self.idea.android-studio.override {
+      #   jdk = pkgs.oraclejdk8;
+      # };
     };
   };
 }
