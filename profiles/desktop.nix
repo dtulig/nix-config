@@ -27,6 +27,6 @@
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
     xkbOptions = "ctrl:nocaps";
-    displayManager.sddm.enable = true;
+    displayManager.lightdm.enable = true;
   };
 }
