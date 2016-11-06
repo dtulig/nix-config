@@ -11,6 +11,9 @@
 
   environment.systemPackages = with pkgs; [
     gcal2org
+
+    acbuild
+    rkt
   ];
 
   services.xserver.xrandrHeads = [ "DVI-0" "DVI-1" ];
