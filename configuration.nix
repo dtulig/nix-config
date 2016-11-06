@@ -66,7 +66,7 @@ rec {
   };
 
   nixpkgs.config.packageOverrides = self: rec {
-    sddm = self.callPackage pkgs/applications/display-managers/sddm/default.nix { };
+    #sddm = self.callPackage pkgs/applications/display-managers/sddm/default.nix { };
     gcal2org = self.callPackage pkgs/gcal2org/default.nix { };
     idea = self.idea // {
       idea-ultimate = self.idea.idea-ultimate.override {
