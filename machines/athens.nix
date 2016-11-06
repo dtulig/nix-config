@@ -130,4 +130,11 @@
     latitude = "30.28";
     longitude = "-97.76";
   };
+
+  services.syncthing = {
+    enable = true;
+    systemService = false;
+    user = "dtulig";
+    group = "users";
+  };
 }
