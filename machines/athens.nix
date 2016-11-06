@@ -16,7 +16,10 @@
     rkt
   ];
 
-  services.xserver.xrandrHeads = [ "DVI-0" "DVI-1" ];
+  services.xserver = {
+    xrandrHeads = [ "DFP3" "DFP4" ];
+    videoDrivers = [ "ati" ];
+  };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;

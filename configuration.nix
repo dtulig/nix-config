@@ -76,5 +76,8 @@ rec {
       #   jdk = pkgs.oraclejdk8;
       # };
     };
+    mesa_noglu = self.mesa_noglu.override {
+      enableTextureFloats = true;
+    };
   };
 }
