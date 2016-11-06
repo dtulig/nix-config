@@ -100,7 +100,12 @@ in
         SOURCE_DIRECTORY=`cat /etc/duplicity/$1.sourceDirectory`
         TARGET_URL=`cat /etc/duplicity/$1.targetUrl`
         ENCRYPT_KEY=`cat /etc/duplicity/$1.encryptKey`
-        exec duplicity --full-if-older-than 1W --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL
+        echo "Starting backup."
+        duplicity --full-if-older-than 1W --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL
+        echo "Removing older than 1M."
+        duplicity remove-older-than 1M --force $TARGET_URL
+        echo "Removing all incremental except 1 full."
+        duplicity remove-all-inc-of-but-n-full 1 --force $TARGET_URL
       '';
 
       serviceConfig = {
