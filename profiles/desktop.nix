@@ -2,7 +2,7 @@
 
 {
   imports = [
-    headless.nix
+    ./headless.nix
   ];
 
   environment.systemPackages = with pkgs; [
