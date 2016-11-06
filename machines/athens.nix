@@ -92,7 +92,7 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", GROUP="plugdev"
   '';
 
-  networking.firewall.allowedTCPPorts = [ 8080 8081 3000 ];
+  networking.firewall.allowedTCPPorts = [ 8080 9876 9000 ];
 
   fileSystems."/mnt/Storage" = {
     device = "192.168.0.60:/c/Storage";
