@@ -5,6 +5,7 @@
     ../profiles/default.nix
     ../profiles/desktop.nix
     ../profiles/development.nix
+    ../profiles/desktop-development.nix
     ../profiles/gaming.nix
   ];
 
