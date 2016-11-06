@@ -6,7 +6,7 @@
     ../profiles/headless.nix
     ../profiles/development.nix
     ../profiles/email.nix
-    <nixos/modules/services/misc/gitit.nix>
+    #<nixos/modules/services/misc/gitit.nix>
   ];
 
   security.pam.enableEcryptfs = true;
@@ -25,7 +25,14 @@
     config = pkgs.lib.readFile /var/lib/nginx/nginx.conf;
   };
 
-  services.gitit = {
+  # services.gitit = {
+  #   enable = false;
+  #   address = "127.0.0.1";
+  #   requireAuthentication = "read";
+  #   authenticationMethod = "http";
+  #   plugins = [];
+  # };
+
     enable = true;
     address = "127.0.0.1";
     requireAuthentication = "read";
