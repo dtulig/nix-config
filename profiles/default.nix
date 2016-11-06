@@ -26,6 +26,9 @@
     gnupg1orig
 
     duplicity
+    rxvt_unicode
+
+    nox
   ];
 
   programs.zsh.enable = true;

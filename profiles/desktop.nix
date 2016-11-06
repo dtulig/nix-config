@@ -12,7 +12,7 @@
 
     # sound
     pavucontrol
-    rxvt_unicode
+
     xscreensaver
 
     feh
