@@ -124,4 +124,10 @@
       };
     };
   };
+
+  services.redshift = {
+    enable = false;
+    latitude = "30.28";
+    longitude = "-97.76";
+  };
 }
