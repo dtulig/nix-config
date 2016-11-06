@@ -119,7 +119,13 @@
       home = {
         sourceDirectory = "/home/dtulig";
         targetUrl = "file:///mnt/backup/dtulig-desktop";
-        period = "02:00";
+        period = "02:15";
+        encryptKey = "CD754EB8";
+      };
+      home-gcs = {
+        sourceDirectory = "/home/dtulig";
+        targetUrl = "gs://backup-davidtulig-com/athens";
+        period = "01:15";
         encryptKey = "CD754EB8";
       };
     };
