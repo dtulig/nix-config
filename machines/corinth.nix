@@ -33,21 +33,40 @@
   #   plugins = [];
   # };
 
+  services.duplicity = {
     enable = true;
-    address = "127.0.0.1";
-    requireAuthentication = "read";
-    authenticationMethod = "http";
-    plugins = [];
+    user = "dtulig";
+    archives = {
+      home = {
+        sourceDirectory = "/home/dtulig";
+        targetUrl = "gs://backup-davidtulig-com/corinth";
+        period = "01:15";
+        encryptKey = "CD754EB8";
+      };
+    };
   };
 
-  security.acme.certs."davidtulig.com" = {
-    webroot = "/var/lib/http";
-    extraDomains = {
-      "wiki.davidtulig.com" = null;
+  security.acme.certs = {
+    "davidtulig.com" = {
+      webroot = "/var/lib/http/davidtulig.com";
+      extraDomains = {
+        "wiki.davidtulig.com" = null;
+      };
+      email = "david.tulig@gmail.com";
+      user = "nginx";
+      group = "nginx";
+      postRun = "systemctl reload nginx.service";
     };
-    email = "david.tulig@gmail.com";
-    user = "nginx";
-    group = "nginx";
-    postRun = "systemctl reload nginx.service";
+    "anyjot.com" = {
+      webroot = "/var/lib/http/anyjot.com";
+      extraDomains = {
+        "api.anyjot.com" = null;
+        "app.anyjot.com" = null;
+      };
+      email = "david.tulig@gmail.com";
+      user = "nginx";
+      group = "nginx";
+      postRun = "systemctl reload nginx.service";
+    };
   };
 }
