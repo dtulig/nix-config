@@ -21,6 +21,10 @@
     videoDrivers = [ "ati" ];
   };
 
+  virtualisation.virtualbox.host.enable = true;
+  nixpkgs.config.virtualbox.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "dtulig" ];
+
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
