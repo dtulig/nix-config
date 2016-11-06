@@ -27,6 +27,10 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
+  hardware.opengl.driSupport32Bit = true;
+
   boot.initrd.mdadmConf = ''
     ARRAY /dev/md0 UUID=912385cd:c0a1b495:b752d81b:fa0837fe
   '';
