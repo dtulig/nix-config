@@ -57,6 +57,31 @@ in
                 default = "";
                 description = "The GPG encryption key id to use to encrypt the backup.";
               };
+
+              fullFreq = mkOption {
+                type = types.string;
+                default = "1W";
+                description = "How often should a new full backup be performed.";
+              };
+
+              fullLife = mkOption {
+                type = types.string;
+                default = "1M";
+                description = "Delete any backup older than this.";
+              };
+
+              keepFull = mkOption {
+                type = types.string;
+                default = "1";
+                description = "How many full backups should be kept.";
+              };
+
+              trickleUpload = mkOption {
+                type = types.string;
+                default = "";
+                description = "Limit upload speed using trickle.";
+              };
+
             };
           }
         ));
@@ -94,18 +119,32 @@ in
       description = "Duplicity backup '%i'";
       requires = [ "network.target" ];
 
-      path = [ pkgs.duplicity pkgs.coreutils ];
+      path = [ pkgs.duplicity pkgs.coreutils pkgs.trickle ];
       scriptArgs = "%i";
       script = ''
         SOURCE_DIRECTORY=`cat /etc/duplicity/$1.sourceDirectory`
         TARGET_URL=`cat /etc/duplicity/$1.targetUrl`
         ENCRYPT_KEY=`cat /etc/duplicity/$1.encryptKey`
+        FULL_FREQ=`cat /etc/duplicity/$1.fullFreq`
+        FULL_LIFE=`cat /etc/duplicity/$1.fullLife`
+        KEEP_FULL=`cat /etc/duplicity/$1.keepFull`
+        TRICKLE_UPLOAD=`cat /etc/duplicity/$1.trickleUpload`
+
         echo "Starting backup."
-        duplicity --full-if-older-than 1W --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL
-        echo "Removing older than 1M."
-        duplicity remove-older-than 1M --force $TARGET_URL
-        echo "Removing all incremental except 1 full."
-        duplicity remove-all-inc-of-but-n-full 1 --force $TARGET_URL
+
+        if [[ -z "$TRICKLE_UPLOAD" ]]; then
+          echo "duplicity --full-if-older-than $FULL_FREQ --file-prefix-manifest manifest_ --file-prefix-archive archive_ --file-prefix-signature signature_ --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL"
+
+          duplicity --full-if-older-than $FULL_FREQ --file-prefix-manifest manifest_ --file-prefix-archive archive_ --file-prefix-signature signature_ --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL
+        else
+          echo "trickle -s -u $TRICKLE_UPLOAD duplicity --full-if-older-than $FULL_FREQ --file-prefix-manifest manifest_ --file-prefix-archive archive_ --file-prefix-signature signature_ --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL"
+          trickle -s -u $TRICKLE_UPLOAD duplicity --full-if-older-than $FULL_FREQ --file-prefix-manifest manifest_ --file-prefix-archive archive_ --file-prefix-signature signature_ --encrypt-key $ENCRYPT_KEY $SOURCE_DIRECTORY $TARGET_URL
+        fi
+
+        echo "Removing older than $FULL_LIFE."
+        duplicity remove-older-than $FULL_LIFE --file-prefix-manifest manifest_ --file-prefix-archive archive_ --file-prefix-signature signature_ --force $TARGET_URL
+        echo "Removing all incremental except $KEEP_FULL full."
+        duplicity remove-all-inc-of-but-n-full $KEEP_FULL --file-prefix-manifest manifest_ --file-prefix-archive archive_ --file-prefix-signature signature_ --force $TARGET_URL
       '';
 
       serviceConfig = {
@@ -130,8 +169,20 @@ in
         }) cfg.archives) //
       (mapAttrs' (name: cfg: nameValuePair "duplicity/${name}.encryptKey"
         { text = cfg.encryptKey;
+        }) cfg.archives) //
+      (mapAttrs' (name: cfg: nameValuePair "duplicity/${name}.fullFreq"
+        { text = cfg.fullFreq;
+        }) cfg.archives) //
+      (mapAttrs' (name: cfg: nameValuePair "duplicity/${name}.fullLife"
+        { text = cfg.fullLife;
+        }) cfg.archives) //
+      (mapAttrs' (name: cfg: nameValuePair "duplicity/${name}.trickleUpload"
+        { text = cfg.trickleUpload;
+        }) cfg.archives) //
+      (mapAttrs' (name: cfg: nameValuePair "duplicity/${name}.keepFull"
+        { text = cfg.keepFull;
         }) cfg.archives);
 
-    environment.systemPackages = [ pkgs.duplicity ];
+    environment.systemPackages = [ pkgs.duplicity pkgs.trickle ];
   };
 }

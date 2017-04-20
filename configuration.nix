@@ -79,5 +79,8 @@ rec {
     mesa_noglu = self.mesa_noglu.override {
       enableTextureFloats = true;
     };
+    duplicity = self.duplicity.override {
+      gnupg = pkgs.gnupg1orig;
+    };
   };
 }
