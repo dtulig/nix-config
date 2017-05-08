@@ -95,12 +95,6 @@
 
   networking.firewall.allowedTCPPorts = [ 8080 9876 9000 ];
 
-  fileSystems."/mnt/Storage" = {
-    device = "192.168.0.60:/c/Storage";
-    fsType = "nfs";
-    options = ["nolock"];
-  };
-
   fileSystems."/mnt/backup" = {
     device = "192.168.0.60:/c/backup";
     fsType = "nfs";
@@ -122,12 +116,29 @@
         targetUrl = "file:///mnt/backup/dtulig-desktop";
         period = "02:15";
         encryptKey = "CD754EB8";
+        fullFreq = "1W";
+        fullLife = "6W";
+        keepFull = "2";
       };
       home-gcs = {
         sourceDirectory = "/home/dtulig";
         targetUrl = "gs://backup-davidtulig-com/athens";
         period = "01:15";
         encryptKey = "CD754EB8";
+        fullFreq = "1M";
+        fullLife = "6M";
+        keepFull = "1";
+        trickleUpload = "400";
+      };
+      storage-gcs = {
+        sourceDirectory = "/mnt/backup/storage";
+        targetUrl = "gs://backup-davidtulig-com/readynas-storage";
+        period = "01:15";
+        encryptKey = "CD754EB8";
+        fullFreq = "6M";
+        fullLife = "2Y";
+        keepFull = "1";
+        trickleUpload = "400";
       };
     };
   };
