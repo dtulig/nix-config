@@ -42,4 +42,14 @@
     xkbOptions = "ctrl:nocaps";
     displayManager.lightdm.enable = true;
   };
+
+  fonts = {
+    fonts = with pkgs; [
+      dejavu_fonts
+      inconsolata
+      font-awesome-ttf
+      powerline-fonts
+      nerdfonts
+    ];
+  };
 }
