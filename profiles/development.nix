@@ -11,5 +11,8 @@
     binutils
 
     nix-repl
+
+    haskellPackages.structured-haskell-mode
+    haskellPackages.stylish-haskell
   ];
 }

@@ -11,9 +11,11 @@ in
     newSteam
 
     minecraft
+    crawlTiles
+
+    wine
+    winetricks
   ];
 
   fonts.enableCoreFonts = true;
-
-
 }

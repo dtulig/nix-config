@@ -7,6 +7,7 @@
     ../profiles/development.nix
     ../profiles/desktop-development.nix
     ../profiles/gaming.nix
+    #../profiles/qemu.nix
   ];
 
   environment.systemPackages = with pkgs; [

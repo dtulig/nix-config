@@ -6,18 +6,31 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    dmenu
+    rofi
     chromium
+    firefox
     haskellPackages.xmobar
 
     # sound
     pavucontrol
 
-    xscreensaver
+    xautolock
+    i3lock
+    scrot
+    imagemagick
+
+    dunst
+    libnotify
 
     feh
     xcompmgr
     glxinfo
+    xclip
+
+    anki
+
+    keepass
+    openconnect
   ];
 
   # Enable the X11 windowing system.

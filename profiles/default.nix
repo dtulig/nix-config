@@ -26,9 +26,16 @@
     gnupg1orig
 
     duplicity
+    trickle
     rxvt_unicode
 
     nox
+
+    aspell
+    aspellDicts.en
+
+    file
+    silver-searcher
   ];
 
   programs.zsh.enable = true;
